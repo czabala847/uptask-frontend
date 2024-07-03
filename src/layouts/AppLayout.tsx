@@ -1,4 +1,5 @@
 import { Logo } from "@/components/Logo";
+import { NavMenu } from "@/components/NavMenu";
 import { Outlet } from "react-router-dom";
 
 export const AppLayout = () => {
@@ -10,7 +11,7 @@ export const AppLayout = () => {
             <Logo />
           </div>
 
-          <nav></nav>
+          <NavMenu />
         </div>
       </header>
       <section className="max-w-screen-2xl mx-auto mt-10 p-5">
