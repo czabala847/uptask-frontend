@@ -21,6 +21,8 @@ export interface ITask {
   description: string;
   project: string;
   status: TaskStatus;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface TaskFormData extends Pick<ITask, "name" | "description"> {}
