@@ -3,6 +3,7 @@ export interface IProject {
   projectName: string;
   clientName: string;
   description: string;
+  tasks: ITask[];
 }
 
 export interface ProjectFormData extends Omit<IProject, "_id"> {}
