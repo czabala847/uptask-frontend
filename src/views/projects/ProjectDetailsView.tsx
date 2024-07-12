@@ -1,5 +1,6 @@
 import { getProjectById } from "@/api/ProjectApi";
 import AddTaskModal from "@/components/tasks/AddTaskModal";
+import { EditTaskData } from "@/components/tasks/EditTaskData";
 import { TaskList } from "@/components/tasks/TaskList";
 import { useQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
@@ -38,6 +39,7 @@ export const ProjectDetailsView = () => {
 
         <TaskList tasks={data.tasks} />
         <AddTaskModal />
+        <EditTaskData />
       </>
     );
   }

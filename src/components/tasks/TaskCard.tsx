@@ -1,13 +1,35 @@
+import { deleteTask } from "@/api/TaskApi";
 import { ITask } from "@/types/index";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Props {
   task: ITask;
 }
 
 export const TaskCard: React.FC<Props> = ({ task }) => {
+  const navigate = useNavigate();
+  const params = useParams();
+  const projectId = params.projectId!;
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: deleteTask,
+    onSuccess: (response) => {
+      queryClient.invalidateQueries({ queryKey: ["editProject", projectId] });
+      toast.success(response);
+      navigate(location.pathname, { replace: true });
+    },
+    onError: ({ message }) => {
+      toast.error(message);
+    },
+  });
+
   return (
     <li className="p-5 bg-white border border-slate-300 flex justify-between gap-3">
       <div className="min-w-0 flex flex-col gap-y-4">
@@ -45,6 +67,9 @@ export const TaskCard: React.FC<Props> = ({ task }) => {
               </Menu.Item>
               <Menu.Item>
                 <button
+                  onClick={() =>
+                    navigate(location.pathname + `?editTask=${task._id}`)
+                  }
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-gray-900"
                 >
@@ -54,6 +79,7 @@ export const TaskCard: React.FC<Props> = ({ task }) => {
 
               <Menu.Item>
                 <button
+                  onClick={() => mutate({ projectId, taskId: task._id })}
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-red-500"
                 >

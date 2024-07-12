@@ -6,7 +6,7 @@ export interface IProject {
   tasks: ITask[];
 }
 
-export interface ProjectFormData extends Omit<IProject, "_id"> {}
+export interface ProjectFormData extends Omit<IProject, "_id" | "tasks"> {}
 
 type TaskStatus =
   | "pending"
