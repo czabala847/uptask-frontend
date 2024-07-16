@@ -1,12 +1,12 @@
-import { createTask } from "@/api/TaskApi";
-import { TaskFormData } from "@/types/index";
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import TaskForm from "./TaskForm";
+import { createTask } from "@/api/TaskApi"
+import { TaskFormData } from "@/types/index"
+import { Dialog, Transition } from "@headlessui/react"
+import { Fragment } from "react"
+import { useForm } from "react-hook-form"
+import { useMutation, useQueryClient } from "react-query"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { toast } from "react-toastify"
+import TaskForm from "./TaskForm"
 
 export default function AddTaskModal() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function AddTaskModal() {
   const { mutate } = useMutation({
     mutationFn: createTask,
     onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ["editProject", projectId] });
+      queryClient.invalidateQueries({ queryKey: ["project", projectId] });
       toast.success(response);
       reset();
       navigate(location.pathname, { replace: true });
