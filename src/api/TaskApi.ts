@@ -1,6 +1,6 @@
-import api from "@/lib/axios";
-import { isAxiosError } from "axios";
-import { IProject, ITask, TaskFormData } from "../types";
+import api from "@/lib/axios"
+import { isAxiosError } from "axios"
+import { IProject, ITask, TaskFormData } from "../types"
 
 export async function createTask({
   data,
@@ -74,6 +74,28 @@ export async function deleteTask({
   try {
     const url = `/projects/${projectId}/tasks/${taskId}`;
     const { data: response } = await api.delete<string>(url);
+    return response;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+
+    throw new Error("Error al obtener los proyectos");
+  }
+}
+
+export async function updateStatusTask({
+  taskId,
+  projectId,
+  status,
+}: {
+  taskId: ITask["_id"];
+  projectId: IProject["_id"];
+  status: ITask["status"];
+}) {
+  try {
+    const url = `/projects/${projectId}/tasks/${taskId}/status`;
+    const { data: response } = await api.post<string>(url, { status });
     return response;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

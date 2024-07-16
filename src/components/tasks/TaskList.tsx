@@ -1,6 +1,7 @@
-import { ITask } from "@/types/index";
-import React from "react";
-import { TaskCard } from "./TaskCard";
+import { statusTranslations } from '@/locales/es'
+import { ITask } from "@/types/index"
+import React from "react"
+import { TaskCard } from "./TaskCard"
 
 interface Props {
   tasks: ITask[];
@@ -16,14 +17,6 @@ const initialStatusGroup: GroupTask = {
   completed: [],
   onHold: [],
   underReview: [],
-};
-
-const statusTranslations: { [key: string]: string } = {
-  pending: "Pendiente",
-  inProgress: "En Progreso",
-  completed: "Completado",
-  onHold: "En Espera",
-  underReview: "En Revisión",
 };
 
 const statusStyles: { [key: string]: string } = {
