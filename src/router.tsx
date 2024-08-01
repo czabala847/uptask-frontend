@@ -1,9 +1,12 @@
-import { AppLayout } from "@/layouts/AppLayout";
-import { DashboardView } from "@/views/DashboardView";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CrearProjectView } from "./views/projects/CrearProjectView";
-import { EditProjectView } from "./views/projects/EditProjectView";
-import { ProjectDetailsView } from "./views/projects/ProjectDetailsView";
+import { AppLayout } from "@/layouts/AppLayout"
+import { DashboardView } from "@/views/DashboardView"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { AuthLayout } from "./layouts/AuthLayout"
+import LoginView from "./views/auth/LoginView"
+import RegisterView from "./views/auth/RegisterView"
+import { CrearProjectView } from "./views/projects/CrearProjectView"
+import { EditProjectView } from "./views/projects/EditProjectView"
+import { ProjectDetailsView } from "./views/projects/ProjectDetailsView"
 
 const Router = () => {
   return (
@@ -17,6 +20,11 @@ const Router = () => {
             path="/projects/:projectId/edit"
             element={<EditProjectView />}
           />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          <Route path="/auth/login" element={<LoginView />} />
+          <Route path="/auth/register" element={<RegisterView />} />
         </Route>
       </Routes>
     </BrowserRouter>
