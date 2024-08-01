@@ -1,7 +1,10 @@
+import { authenticateUser } from "@/api/AuthApi"
 import { ErrorMessage } from "@/components/ErrorMessage"
 import { UserLoginForm } from "@/types/index"
 import { useForm } from "react-hook-form"
+import { useMutation } from "react-query"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export default function LoginView() {
   const initialValues: UserLoginForm = {
@@ -14,7 +17,24 @@ export default function LoginView() {
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
-  const handleLogin = (formData: UserLoginForm) => {};
+  const { mutate } = useMutation({
+    mutationFn: authenticateUser,
+    onSuccess: (response) => {
+      // queryClient.invalidateQueries({ queryKey: ["projects"] });
+      // queryClient.invalidateQueries({ queryKey: ["editProject", data._id] });
+
+      toast.success(response);
+      // reset();
+      // navigate("/");
+    },
+    onError: ({ message }) => {
+      toast.error(message);
+    },
+  });
+
+  const handleLogin = (formData: UserLoginForm) => {
+    mutate(formData);
+  };
 
   return (
     <>
