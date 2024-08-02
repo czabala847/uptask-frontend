@@ -37,3 +37,17 @@ export interface Auth {
 export interface UserLoginForm extends Pick<Auth, "email" | "password"> {}
 export interface UserRegistrationForm
   extends Pick<Auth, "email" | "password" | "name" | "password_confirmation"> {}
+export interface RequestConfirmationCodeForm {
+  email: string;
+}
+export interface ForgotPasswordForm {
+  email: string;
+}
+export interface ConfirmToken {
+  token: string;
+}
+
+export interface NewPasswordForm {
+  password: string;
+  password_confirmation: string;
+}
