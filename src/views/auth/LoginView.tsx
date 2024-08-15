@@ -19,11 +19,11 @@ export default function LoginView() {
 
   const { mutate } = useMutation({
     mutationFn: authenticateUser,
-    onSuccess: (response) => {
+    onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["projects"] });
       // queryClient.invalidateQueries({ queryKey: ["editProject", data._id] });
 
-      toast.success(response);
+      toast.success('Iniciando Sesion');
       // reset();
       // navigate("/");
     },

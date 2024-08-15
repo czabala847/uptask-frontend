@@ -43,6 +43,7 @@ export async function confirmAccount(token: string) {
 export async function authenticateUser(data: UserLoginForm) {
   try {
     const { data: response } = await api.post<string>("/auth/login", data);
+    localStorage.setItem("AUTH_TOKEN", response);
     return response;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
